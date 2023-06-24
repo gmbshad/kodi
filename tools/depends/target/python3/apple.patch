@@ -1,0 +1,39 @@
+--- a/configure.ac
++++ b/configure.ac
+@@ -400,6 +400,9 @@
+ 	*-*-cygwin*)
+ 		ac_sys_system=Cygwin
+ 		;;
++	*-*-darwin*)
++		ac_sys_system=Darwin
++		;;
+ 	*-*-vxworks*)
+ 	    ac_sys_system=VxWorks
+ 	    ;;
+@@ -449,6 +449,8 @@
+ 	*-*-cygwin*)
+ 		_host_cpu=
+ 		;;
++	*-*-darwin*)
++		;;
+ 	*-*-vxworks*)
+ 		_host_cpu=$host_cpu
+ 		;;
+@@ -521,6 +521,8 @@
+     define_xopen_source=no;;
+   Darwin/@<:@[12]@:>@@<:@0-9@:>@.*)
+     define_xopen_source=no;;
++  Darwin/*)
++    define_xopen_source=no;;
+   # On AIX 4 and 5.1, mbstate_t is defined only when _XOPEN_SOURCE == 500 but
+   # used in wcsnrtombs() and mbsnrtowcs() even if _XOPEN_SOURCE is not defined
+   # or has another value. By not (re)defining it, the defaults come in place.
+@@ -2485,7 +2485,7 @@
+       	  return 1;
+       }
+     }
+-    ]])],[ac_osx_32bit=yes],[ac_osx_32bit=no],[ac_osx_32bit=yes])
++    ]])],[ac_osx_32bit=yes],[ac_osx_32bit=no],[ac_osx_32bit=no])
+ 
+     if test "${ac_osx_32bit}" = "yes"; then
+     	case `/usr/bin/arch` in
