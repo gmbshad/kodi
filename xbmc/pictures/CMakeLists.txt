@@ -1,0 +1,42 @@
+set(SOURCES ExifParse.cpp
+            GUIDialogPictureInfo.cpp
+            GUIViewStatePictures.cpp
+            GUIWindowPictures.cpp
+            GUIWindowSlideShow.cpp
+            IptcParse.cpp
+            JpegParse.cpp
+            libexif.cpp
+            Picture.cpp
+            PictureInfoLoader.cpp
+            PictureInfoTag.cpp
+            PictureScalingAlgorithm.cpp
+            PictureThumbLoader.cpp
+            SlideShowPicture.cpp)
+
+set(HEADERS GUIDialogPictureInfo.h
+            GUIViewStatePictures.h
+            GUIWindowPictures.h
+            GUIWindowSlideShow.h
+            Picture.h
+            PictureInfoLoader.h
+            PictureInfoTag.h
+            PictureScalingAlgorithm.h
+            PictureThumbLoader.h
+            SlideShowPicture.h)
+
+if(OPENGL_FOUND)
+  list(APPEND SOURCES SlideShowPictureGL.cpp)
+  list(APPEND HEADERS SlideShowPictureGL.h)
+endif()
+
+if(OPENGLES_FOUND)
+  list(APPEND SOURCES SlideShowPictureGLES.cpp)
+  list(APPEND HEADERS SlideShowPictureGLES.h)
+endif()
+
+if(CORE_SYSTEM_NAME STREQUAL windows OR CORE_SYSTEM_NAME STREQUAL windowsstore)
+  list(APPEND SOURCES SlideShowPictureDX.cpp)
+  list(APPEND HEADERS SlideShowPictureDX.h)
+endif()
+
+core_add_library(pictures)
